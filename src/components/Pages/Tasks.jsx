@@ -6,8 +6,8 @@ import TodoItem from "../TODO/TodoItem";
 const Tasks = () => {
   const [filter, setFilter] = useState("all");
     const [tasks,setTasks]=useState(()=>{
-    const saved=localStorage.getItem("tasks");
-    return saved?JSON.parse(saved):[];
+    const save=localStorage.getItem("tasks");
+    return save?JSON.parse(save):[];
   });
    useEffect(() => { localStorage.setItem("tasks", JSON.stringify(tasks)) }, [tasks])
   return(
