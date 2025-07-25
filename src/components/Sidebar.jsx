@@ -5,7 +5,7 @@ import SideItem from "./SideItem";
 
 const Sidebar = () => {
   return (
-    <div className="bg-gray-900 text-white w-[300px] rounded-md">
+    <div className="bg-gray-900  dark:bg-white dark:text-black z-[9999] text-white w-[300px] ">
       <div className="flex flex-col mx-3 px-3 justify-center mt-3">
         {/* Top Logo/Header */}
         <div className="flex flex-row items-center justify-center gap-8 h-24 w-full rounded-md shadow-2xl">
@@ -15,8 +15,8 @@ const Sidebar = () => {
 
         {/* Menu Items */}
         <div className="mt-5">
-          {sidebarItems.map(({ name, icon:Icon }) => (
-            <SideItem key={name} icon={<Icon className="text-4xl"/>} name={name} />
+          {sidebarItems.map(({ name, icon:Icon,route }) => (
+            <SideItem key={name} icon={<Icon className="text-4xl"/>} name={name} route={route} />
     
           ))}
         </div>

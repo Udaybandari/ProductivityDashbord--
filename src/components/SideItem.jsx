@@ -1,11 +1,15 @@
+// src/components/SideItem.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 
-const SideItem = ({ icon, name }) => {
+const SideItem = ({ icon, name, route }) => {
   return (
-    <div className="flex items-start p-3 pl-0 gap-2 hover:bg-blue-700/80 rounded-md cursor-pointer transition">
-      {icon}
-      <h1 className="text-2xl">{name}</h1>
-    </div>
+    <Link to={route}>
+      <div className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-700 cursor-pointer transition-all">
+        {icon}
+        <span className="text-xl">{name}</span>
+      </div>
+    </Link>
   );
 };
 
