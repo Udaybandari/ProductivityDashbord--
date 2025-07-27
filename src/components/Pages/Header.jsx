@@ -4,11 +4,12 @@ import { FaMoon } from "react-icons/fa";
 
 import { IoPersonSharp } from "react-icons/io5";
 import { useTheme } from "../../context/ThemeContext";
-const Header = () => {
+const Header = ({title,rightcontent}) => {
   const{theme,toggleTheme}=useTheme();
   return (
     <header className=" dark:bg-gray-900 dark:text-white fixed top-0 left-0 w-full h-20 bg-white z-50 custom-shadow flex items-center justify-end pr-8">
       <div className="flex items-center gap-8">
+        <h1>{title}</h1>
         <div className="relative flex items-center custom-shadow rounded-2xl h-12 bg-gray-200 px-2">
           <CiSearch className="text-2xl dark:text-black hover:text-red-400" />
           <input

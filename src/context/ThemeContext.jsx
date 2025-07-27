@@ -10,7 +10,7 @@ export const useTheme = () => useContext(ThemeContext);
 // 3. Theme Provider
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState("light");
-
+    const [filter, setFilter] = useState("all");
  useEffect(()=>
  {
    const save=localStorage.getItem("theme")||"light";
@@ -29,7 +29,7 @@ export const ThemeProvider = ({ children }) => {
 
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme ,filter,setFilter}}>
       {children}
     </ThemeContext.Provider>
   );

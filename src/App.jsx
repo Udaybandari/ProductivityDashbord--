@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar.jsx"
-import Header from "./components/Pages/Header.jsx";
+
 import Dashboard from "./components/Pages/Dashboard.jsx";
 import Tasks from "./components/Pages/Tasks.jsx";
 import Habits from "./components/Pages/Habits.jsx";
@@ -13,7 +13,7 @@ const App = () => {
       <div className="flex h-screen">
     <Sidebar/>
      <div className="flex flex-col flex-1 pt-20">
-      <Header/>
+    
     
        <div className="pt-5 px-6 overflow-y-auto dark:bg-gray-900 dark:text-white">
             <Routes>
