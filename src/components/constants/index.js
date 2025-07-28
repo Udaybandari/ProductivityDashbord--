@@ -7,3 +7,11 @@ export const sidebarItems = [
   { name: "Pomodoro", icon: CiClock2, route: "/pomodoro" },
   { name: "Settings", icon: CiSettings, route: "/settings" },
 ];
+export const habitTemplates = [
+  { name: "Drink Water", type: "litres", icon: "🥤" },
+  { name: "Meditation", type: "timer", icon: "🧘" },
+  { name: "Reading", type: "timer", icon: "📚" },
+  { name: "Walking", type: "timer", icon: "🚶" },
+  { name: "Workout", type: "timer", icon: "🏋️" }
+];
+

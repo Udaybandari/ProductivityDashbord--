@@ -32,7 +32,7 @@ const filteredTasks = tasks.filter(task => {
   
     
   return (
-  <section className="  overflow-scroll h-92 max-md:h-66">
+  <section className="  overflow-scroll h-500 max-md:h-66">
       <div className=" flex flex-col gap-3 justify-center mx-9 mt-8  items-center   ">
    {filteredTasks.map((task)=>(
     <div key={task.id} className="flex  w-full p-3 gap-4 relative shadow-custom rounded-2xl  overflow-hidden ">

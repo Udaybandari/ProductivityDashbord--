@@ -10,26 +10,40 @@ export const useTheme = () => useContext(ThemeContext);
 // 3. Theme Provider
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState("light");
-    const [filter, setFilter] = useState("all");
- useEffect(()=>
- {
-   const save=localStorage.getItem("theme")||"light";
-   setTheme(save);
- },[]
+  const [filter, setFilter] = useState("all");
+  const [showOptions, setShowOptions] = useState(false);
 
- )
- const toggleTheme=()=>{
-  const newtheme=theme=="dark"?"light":"dark";
-  setTheme(newtheme);
-  document.documentElement.className=newtheme;
-  localStorage.setItem("theme",newtheme);
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+    document.documentElement.className = savedTheme;
+  }, []);
 
- }
+  // Theme toggle function
+  const toggleTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    document.documentElement.className = newTheme;
+    localStorage.setItem("theme", newTheme);
+  };
+  const handleHabitSelect = (habit) => {
+  // setHabits((prev) => [...prev, habit]);  // add the selected habit
 
-
+  setShowOptions(false);                  // hide the options again
+};
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme ,filter,setFilter}}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        toggleTheme,
+        filter,
+        setFilter,
+        showOptions,
+        setShowOptions,
+   
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   );

@@ -15,7 +15,7 @@ const App = () => {
      <div className="flex flex-col flex-1 pt-20">
     
     
-       <div className="pt-5 px-6 overflow-y-auto dark:bg-gray-900 dark:text-white">
+       <div className="pt-5 px-6 overflow-y-auto dark:bg-gray-950 dark:text-white">
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/tasks" element={<Tasks />} />
