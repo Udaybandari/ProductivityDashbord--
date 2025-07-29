@@ -12,6 +12,10 @@ export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState("light");
   const [filter, setFilter] = useState("all");
   const [showOptions, setShowOptions] = useState(false);
+const [habits, setHabits] = useState(() => {
+  const stored = localStorage.getItem("habits");
+  return stored ? JSON.parse(stored) : [];
+});
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -26,11 +30,9 @@ export const ThemeProvider = ({ children }) => {
     document.documentElement.className = newTheme;
     localStorage.setItem("theme", newTheme);
   };
-  const handleHabitSelect = (habit) => {
-  // setHabits((prev) => [...prev, habit]);  // add the selected habit
 
-  setShowOptions(false);                  // hide the options again
-};
+
+
 
   return (
     <ThemeContext.Provider
@@ -41,6 +43,9 @@ export const ThemeProvider = ({ children }) => {
         setFilter,
         showOptions,
         setShowOptions,
+        habits,
+        setHabits,
+   
    
       }}
     >
