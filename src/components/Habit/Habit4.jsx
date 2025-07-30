@@ -5,6 +5,7 @@ import { MdOutlineTimer } from "react-icons/md";
 const Habit4 = () => {
   const { habits, setHabits } = useTheme();
 
+
   const handleDelete = (habitToDelete) => {
     const updated = habits.filter(h => h.name !== habitToDelete.name);
     setHabits(updated);
