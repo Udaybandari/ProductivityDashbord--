@@ -10,7 +10,7 @@ const getHabits = () => {
 export const useHabitsStorage = () => {
   const [habits, setHabitsState] = useState(() => getHabits());
 
-  const setHabits = (newHabits) => {
+  function setHabits(newHabits) {
     setHabitsState(newHabits);
     localStorage.setItem("habits", JSON.stringify(newHabits));
   };

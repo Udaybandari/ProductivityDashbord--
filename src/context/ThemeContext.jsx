@@ -1,6 +1,7 @@
 // src/context/ThemeContext.jsx
 import React, { createContext, useState, useEffect, useContext } from "react";
-
+import { useHabitsStorage } from "../components/hooks/useLocalStorage";
+import { useThemeStorage } from "../components/hooks/useThemeStorage";
 // 1. Create the context
 const ThemeContext = createContext();
 
@@ -9,19 +10,12 @@ export const useTheme = () => useContext(ThemeContext);
 
 // 3. Theme Provider
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useThemeStorage();
   const [filter, setFilter] = useState("all");
   const [showOptions, setShowOptions] = useState(false);
-const [habits, setHabits] = useState(() => {
-  const stored = localStorage.getItem("habits");
-  return stored ? JSON.parse(stored) : [];
-});
+const [habits, setHabits] = useHabitsStorage();
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    setTheme(savedTheme);
-    document.documentElement.className = savedTheme;
-  }, []);
+
 
   // Theme toggle function
   const toggleTheme = () => {

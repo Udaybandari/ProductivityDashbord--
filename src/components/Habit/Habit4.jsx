@@ -9,7 +9,7 @@ const Habit4 = () => {
   const handleDelete = (habitToDelete) => {
     const updated = habits.filter(h => h.name !== habitToDelete.name);
     setHabits(updated);
-    localStorage.setItem("habits", JSON.stringify(updated));
+   
   };
 
   return (
