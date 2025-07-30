@@ -1,5 +1,6 @@
 import React from "react";
 import { useTheme } from "../../context/ThemeContext";
+import { MdOutlineTimer } from "react-icons/md";
 
 const Habit4 = () => {
   const { habits, setHabits } = useTheme();
@@ -30,15 +31,28 @@ const Habit4 = () => {
                 Frequency: <span className="capitalize">{habit.frequency}</span>
               </p>
 
-              {habit.type === "timer" ? (
-                <p className="text-sm text-gray-600">
-                  Duration: {habit.hours}h {habit.minutes}m {habit.seconds}s
-                </p>
-              ) : (
-                <p className="text-sm text-gray-600">
-                  Target: {habit.time} L
-                </p>
-              )}
+           {habit.type === "timer" ? (
+  (habit.hours || habit.minutes || habit.seconds) ? (
+    <div className="flex items-center gap-2 text-sm text-gray-600">
+      <MdOutlineTimer className="text-lg text-gray-500" />
+      <span>
+        {habit.hours ? `${habit.hours} ${habit.hours === 1 ? "hour" : "hours"} ` : ""}
+        {habit.minutes ? `${habit.minutes} ${habit.minutes === 1 ? "minute" : "minutes"} ` : ""}
+        {habit.seconds ? `${habit.seconds} ${habit.seconds === 1 ? "second" : "seconds"}` : ""}
+      </span>
+    </div>
+  ) : (
+    <div className="flex items-center gap-2 text-sm text-gray-400 italic">
+      <MdOutlineTimer className="text-lg text-gray-400" />
+      <span>No time set</span>
+    </div>
+  )
+) : (
+  <p className="text-sm text-gray-600">
+    Target: {habit.time} L
+  </p>
+)}
+
 
               <button
                 onClick={() => handleDelete(habit)}
