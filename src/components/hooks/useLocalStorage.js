@@ -1,19 +1,16 @@
 import { useState } from "react";
 
-// Step 1: Separate getter function
-const getHabits = () => {
-  const stored = localStorage.getItem("habits");
+const getHabits = (key) => {
+  const stored = localStorage.getItem("key");
   return stored ? JSON.parse(stored) : [];
 };
 
-// Step 2: Hook to manage habits from localStorage
-export const useHabitsStorage = () => {
-  const [habits, setHabitsState] = useState(() => getHabits());
+export const useHabitsStorage = (storagekey) => {
+     const[data,setData]=useState(()=>getHabits());
 
-  function setHabits(newHabits) {
-    setHabitsState(newHabits);
-    localStorage.setItem("habits", JSON.stringify(newHabits));
-  };
-
-  return [habits, setHabits];
+  function setDatas(newHabits) {
+    setData(newHabits);
+    localStorage.setItem(storagekey, JSON.stringify(newHabits));
+  }
+  return [data, setDatas];
 };

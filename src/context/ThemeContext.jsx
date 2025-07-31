@@ -1,32 +1,16 @@
-// src/context/ThemeContext.jsx
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { useHabitsStorage } from "../components/hooks/useLocalStorage";
 import { useThemeStorage } from "../components/hooks/useThemeStorage";
-// 1. Create the context
-const ThemeContext = createContext();
 
-// 2. Custom hook for easy access
+const ThemeContext = createContext();
 export const useTheme = () => useContext(ThemeContext);
 
-// 3. Theme Provider
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useThemeStorage();
+  const [theme, toggleTheme] = useThemeStorage();
   const [filter, setFilter] = useState("all");
   const [showOptions, setShowOptions] = useState(false);
-const [habits, setHabits] = useHabitsStorage();
-
-
-
-  // Theme toggle function
-  const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    document.documentElement.className = newTheme;
-    localStorage.setItem("theme", newTheme);
-  };
-
-
-
+  const [habits, setHabits] = useHabitsStorage("habits");
+ 
 
   return (
     <ThemeContext.Provider
@@ -39,8 +23,6 @@ const [habits, setHabits] = useHabitsStorage();
         setShowOptions,
         habits,
         setHabits,
-   
-   
       }}
     >
       {children}

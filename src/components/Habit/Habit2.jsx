@@ -4,14 +4,13 @@ import { useTheme } from "../../context/ThemeContext";
 import Habit3 from "./Habit3";
 
 const Habit2 = () => {
-  const { showOptions, setShowOptions } = useTheme(false);
+  const { showOptions, setShowOptions } = useTheme();
   const [dummy, setDummy] = useState(null);
 
-const handleHabitSelect =(habit)=>{
-  setDummy({name:habit.name,icon:habit.icon,type:habit.type});
-  setShowOptions(false);
-}
-
+  const handleHabitSelect = (habit) => {
+    setDummy({ name: habit.name, icon: habit.icon, type: habit.type });
+    setShowOptions(false);
+  };
 
   return (
     <div>
@@ -29,9 +28,7 @@ const handleHabitSelect =(habit)=>{
           ))}
         </div>
       )}
-
-    <Habit3 dummy={dummy} setDummy={setDummy} />
-
+      <Habit3 dummy={dummy} setDummy={setDummy} />
     </div>
   );
 };

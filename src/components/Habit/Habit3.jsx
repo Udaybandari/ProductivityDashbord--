@@ -1,25 +1,23 @@
 import React from "react";
 import { useTheme } from "../../context/ThemeContext";
-const Habit3 = ({dummy, setDummy}) => {
-  const {habits,setHabits}=useTheme();
-const handlehabit = () => {
-  const { frequency, type } = dummy;
 
-  if (!frequency) {
-    alert("Please select a frequency.");
-    return;
-  }
+const Habit3 = ({ dummy, setDummy }) => {
+  const { habits, setHabits } = useTheme();
 
-  setHabits(prev => {
-    const updated = [...prev, dummy];
-    localStorage.setItem("habits", JSON.stringify(updated));
-    return updated;
-  });
-
-  console.log("Habit added:", dummy);
-  setDummy(null);
-};
-console.log(habits)
+  const handlehabit = () => {
+    const { frequency, type } = dummy;
+    if (!frequency) {
+      alert("Please select a frequency.");
+      return;
+    }
+    const alreadyExists = habits.some((h) => h.name === dummy.name);
+    if (alreadyExists) {
+      alert("Habit with this name already exists!");
+      return;
+    }
+    setHabits([...habits, dummy]);
+    setDummy(null);
+  };
 
   return (
     <div>
@@ -32,7 +30,7 @@ console.log(habits)
               <h2 className="text-3xl">{dummy.name}</h2>
             </div>
           </div>
-          
+
           <div className="flex flex-col cursor-pointer items-center justify-center">
             <label className="text-[22px]">Frequency:</label>
             <select
@@ -51,25 +49,19 @@ console.log(habits)
                 className="focus:outline-none w-32 rounded-md"
                 type="number"
                 placeholder="Hours"
-                onChange={(e) =>
-                  setDummy({ ...dummy, hours: parseInt(e.target.value || 0) })
-                }
+                onChange={(e) => setDummy({ ...dummy, hours: parseInt(e.target.value) || 0 })}
               />
               <input
                 className="focus:outline-none w-32"
                 type="number"
                 placeholder="Minutes"
-                onChange={(e) =>
-                  setDummy({ ...dummy, minutes: parseInt(e.target.value || 0) })
-                }
+                onChange={(e) => setDummy({ ...dummy, minutes: parseInt(e.target.value) || 0 })}
               />
               <input
                 className="focus:outline-none w-32"
                 type="number"
                 placeholder="Seconds"
-                onChange={(e) =>
-                  setDummy({ ...dummy, seconds: parseInt(e.target.value || 0) })
-                }
+                onChange={(e) => setDummy({ ...dummy, seconds: parseInt(e.target.value) || 0 })}
               />
             </div>
           ) : (
@@ -78,13 +70,15 @@ console.log(habits)
               type="number"
               placeholder="Enter Litres..."
               onChange={(e) =>
-                setDummy({ ...dummy, time: parseInt(e.target.value || 0) })
+                setDummy({ ...dummy, time: parseInt(e.target.value) || 0 })
               }
             />
           )}
 
-          <button onClick={handlehabit
-          } className="cursor-pointer bg-blue-800 rounded-md text-white px-4 py-2 mt-4">
+          <button
+            onClick={handlehabit}
+            className="cursor-pointer bg-blue-800 rounded-md text-white px-4 py-2 mt-4"
+          >
             Add Habit
           </button>
         </div>

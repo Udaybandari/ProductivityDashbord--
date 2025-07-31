@@ -1,15 +1,27 @@
-// src/hooks/useThemeStorage.js
 import { useEffect, useState } from "react";
 
 export const useThemeStorage = () => {
-  const [theme, setTheme] = useState(() => {
+  const [theme, setThemes] = useState(() => {
     return localStorage.getItem("theme") || "light";
   });
 
+
+const setTheme = (newtheme)=>{
+      setThemes(newtheme);
+      localStorage.setItem("theme",newtheme);
+  }
+
   useEffect(() => {
     document.documentElement.className = theme;
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  }, []);
 
-  return [theme, setTheme];
+   const togglesTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    document.documentElement.className = newTheme; // ✅ This changes the theme class
+   
+  };
+
+
+  return [theme, togglesTheme];
 };
