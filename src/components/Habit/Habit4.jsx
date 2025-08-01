@@ -12,7 +12,7 @@ const Habit4 = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 ">
       {habits.length === 0 ? (
         <p className="text-gray-500">No habits added yet.</p>
       ) : (
@@ -20,7 +20,7 @@ const Habit4 = () => {
           {habits.map((habit, index) => (
             <div
               key={index}
-              className="bg-white shadow-md  rounded-lg p-4  flex gap-45 w-full"
+              className="bg-white dark:bg-gray-950 shadow-md  rounded-lg p-4  flex gap-45 w-full"
             >
              <div className="flex flex-col items-center justify-center gap-3">
                <div className="flex items-center gap-2 text-4xl">
@@ -57,8 +57,12 @@ const Habit4 = () => {
                 Delete
               </button>
              </div>
-             
-                <Timer/>
+             {
+              habit.type=="timer"?(
+              <Timer/>
+              ):(null)
+             }
+               
             </div>
           ))}
         </div>
