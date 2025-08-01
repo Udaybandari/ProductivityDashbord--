@@ -12,15 +12,15 @@ const Habit4 = () => {
   };
 
   return (
-    <div className="p-4 ">
+    <div className="p-4  ">
       {habits.length === 0 ? (
         <p className="text-gray-500">No habits added yet.</p>
       ) : (
-        <div className="flex flex-col gap-2 custom-shadow ">
+        <div className="flex flex-col gap-2   ">
           {habits.map((habit, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-gray-950 shadow-md  rounded-lg p-4  flex gap-45 w-full"
+              className="bg-white relative custom-shadow  dark:border-1 dark:shadow-2xl dark:bg-gray-950 shadow-md  rounded-lg p-4  flex gap-45 w-full"
             >
              <div className="flex flex-col items-center justify-center gap-3">
                <div className="flex items-center gap-2 text-4xl">
@@ -59,7 +59,8 @@ const Habit4 = () => {
              </div>
              {
               habit.type=="timer"?(
-              <Timer/>
+              <Timer minutes={habit.minutes} hours={habit.hours} seconds={habit.seconds} />
+
               ):(null)
              }
                
