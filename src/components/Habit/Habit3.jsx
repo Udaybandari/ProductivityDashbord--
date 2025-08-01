@@ -10,12 +10,28 @@ const Habit3 = ({ dummy, setDummy }) => {
       alert("Please select a frequency.");
       return;
     }
-    const alreadyExists = habits.some((h) => h.name === dummy.name);
-    if (alreadyExists) {
-      alert("Habit with this name already exists!");
-      return;
-    }
-    setHabits([...habits, dummy]);
+const name = dummy.name?.trim().toLowerCase();
+const alreadyExists = habits.some(
+  (h) => h.name.trim().toLowerCase() === name
+);
+if (alreadyExists) {
+  alert("Habit with this name already exists!");
+  setDummy(null);
+  return;
+}
+
+const newHabit = {
+  ...dummy,
+  ...(dummy.type === "timer" && {
+    isRunning: false,
+    elapsed: 0,
+    startTime: null
+  })
+};
+
+setHabits([...habits, newHabit]);
+
+
     setDummy(null);
   };
 

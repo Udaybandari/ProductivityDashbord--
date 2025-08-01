@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa6";
 import { useTheme } from "../../context/ThemeContext";
 
 const Habit1 = () => {
-  const { showOptions, setShowOptions } = useTheme();
+  const {  setShowOptions } = useTheme();
   return (
     <div className="flex gap-44 w-200">
       <h1 className="text-3xl font-bold">All Habits</h1>
