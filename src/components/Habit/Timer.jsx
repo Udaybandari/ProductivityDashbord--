@@ -5,13 +5,20 @@ const Timer = ({ hours = 0, minutes = 0, seconds = 0 }) => {
   const [elapsed, setElapsed] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef(null);
-  const [color,setColor]=useState(false);
+
 
   // Initialize elapsed time when inputs change
-  useEffect(() => {
-    const totalSeconds = hours * 3600 + minutes * 60 + seconds;
-    setElapsed(totalSeconds);
-  }, [hours, minutes, seconds]);
+
+
+useEffect(() => {
+  if (isRunning) {
+    localStorage.setItem("elapsed", String(elapsed));
+    localStorage.setItem("lastUpdated", String(Date.now()));
+    localStorage.setItem("isRunning", "true");
+  } else {
+    localStorage.setItem("isRunning", "false");
+  }
+}, [elapsed, isRunning]);
 
   // Countdown timer logic
   useEffect(() => {
