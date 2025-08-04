@@ -8,39 +8,56 @@ const MODES = {
 
 const Pomodoro = () => {
   const [mode, setMode] = useState("work");
-  const [timeLeft, setTimeLeft] = useState(MODES[mode].duration);
+  const [timeLeft, setTimeLeft] = useState(MODES["work"].duration);
   const [isRunning, setIsRunning] = useState(false);
   const [cycles, setCycles] = useState(0);
   const intervalRef = useRef(null);
-   
+  const hasLoadedRef = useRef(false);
 
-
+  // ✅ Load saved state on mount
   useEffect(() => {
-  const saved = JSON.parse(localStorage.getItem("pomodoroState"));
-  if (saved) {
-    setMode(saved.mode || "work");
-    setTimeLeft(saved.timeLeft || MODES["work"].duration);
-    setIsRunning(false); // Don't auto-resume timer
-    setCycles(saved.cycles || 0);
-  }
-}, []);
-useEffect(() => {
-  const stateToSave = {
-    mode,
-    timeLeft,
-    cycles,
-  };
-  localStorage.setItem("pomodoroState", JSON.stringify(stateToSave));
-}, [mode, timeLeft, cycles]);
+    const saved = JSON.parse(localStorage.getItem("pomodoroState"));
+    if (saved) {
+      const { mode, timeLeft, cycles, lastUpdated, isRunning } = saved;
 
+      const now = Date.now();
+      let updatedTimeLeft = timeLeft;
 
-  // When mode changes, reset the timer
+      if (isRunning && lastUpdated) {
+        const secondsPassed = Math.floor((now - lastUpdated) / 1000);
+        updatedTimeLeft = Math.max(timeLeft - secondsPassed, 0);
+      }
+
+      setMode(mode || "work");
+      setTimeLeft(updatedTimeLeft);
+      setCycles(cycles || 0);
+      setIsRunning(updatedTimeLeft > 0 && isRunning);
+    }
+    hasLoadedRef.current = true;
+  }, []);
+
+  // ✅ Save state to localStorage on change
   useEffect(() => {
-    setTimeLeft(MODES[mode].duration);
-    setIsRunning(false);
-    clearInterval(intervalRef.current);
+    const stateToSave = {
+      mode,
+      timeLeft,
+      cycles,
+      isRunning,
+      lastUpdated: Date.now(),
+    };
+    localStorage.setItem("pomodoroState", JSON.stringify(stateToSave));
+  }, [mode, timeLeft, cycles, isRunning]);
+
+  // ✅ Reset timer when manually switching mode
+  useEffect(() => {
+    if (hasLoadedRef.current) {
+      clearInterval(intervalRef.current);
+      setTimeLeft(MODES[mode].duration);
+      setIsRunning(false);
+    }
   }, [mode]);
 
+  // ✅ Timer countdown
   useEffect(() => {
     if (isRunning) {
       intervalRef.current = setInterval(() => {
@@ -61,11 +78,7 @@ useEffect(() => {
     if (mode === "work") {
       const newCycles = cycles + 1;
       setCycles(newCycles);
-      if (newCycles % 4 === 0) {
-        setMode("longBreak");
-      } else {
-        setMode("shortBreak");
-      }
+      setMode(newCycles % 4 === 0 ? "longBreak" : "shortBreak");
     } else {
       setMode("work");
     }
@@ -117,6 +130,16 @@ useEffect(() => {
       </div>
 
       <p className="text-sm text-gray-500">Pomodoros completed: {cycles}</p>
+
+      <button
+        onClick={() => {
+          localStorage.removeItem("pomodoroState");
+          window.location.reload();
+        }}
+        className="text-xs text-red-500 underline mt-2"
+      >
+        Clear Saved Timer
+      </button>
     </div>
   );
 };
