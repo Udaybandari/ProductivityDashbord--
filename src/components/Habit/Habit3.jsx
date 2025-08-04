@@ -5,7 +5,7 @@ const Habit3 = ({ dummy, setDummy }) => {
   const { habits, setHabits } = useTheme();
 
   const handlehabit = () => {
-    const { frequency, type } = dummy;
+    const { frequency} = dummy;
     if (!frequency) {
       alert("Please select a frequency.");
       return;
