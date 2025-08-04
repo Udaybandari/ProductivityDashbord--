@@ -24,6 +24,15 @@ const Pomodoro = () => {
     setCycles(saved.cycles || 0);
   }
 }, []);
+useEffect(() => {
+  const stateToSave = {
+    mode,
+    timeLeft,
+    cycles,
+  };
+  localStorage.setItem("pomodoroState", JSON.stringify(stateToSave));
+}, [mode, timeLeft, cycles]);
+
 
   // When mode changes, reset the timer
   useEffect(() => {
