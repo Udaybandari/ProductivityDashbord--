@@ -136,7 +136,7 @@ const Pomodoro = () => {
           localStorage.removeItem("pomodoroState");
           window.location.reload();
         }}
-        className="text-xs text-red-500 underline mt-2"
+        className="text-xs text-gray-800 underline mt-2"
       >
         Clear Saved Timer
       </button>

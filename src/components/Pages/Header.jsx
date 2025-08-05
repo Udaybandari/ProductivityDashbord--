@@ -21,7 +21,7 @@ const Header = ({title,right}) => {
         </div>
        <button onClick={toggleTheme} >
           {theme === "dark" ? (
-            <CiLight className="text-3xl cursor-pointer hover:text-yellow-400" />
+            <CiLight className="text-3xl cursor-pointer hover:text-yellow-500" />
           ) : (
             <FaMoon className="text-3xl cursor-pointer hover:text-gray-700" />
           )}
